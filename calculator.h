@@ -33,6 +33,9 @@ public slots:
     void szesnastkowy();
     void osemkowy();
 
+    void przesuniecieLewo();
+    void przesunieciePrawo();
+
 
 private:
     int m_lastResult;

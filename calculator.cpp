@@ -25,6 +25,16 @@ void Calculator::osemkowy()
 
 }
 
+void Calculator::przesuniecieLewo()
+{
+    m_operation=5;
+}
+
+void Calculator::przesunieciePrawo()
+{
+    m_operation=6;
+}
+
 void Calculator::numEntered(int a)
 {
     if(m_currentNumebr==0)
@@ -44,13 +54,16 @@ void Calculator::numEntered(int a)
 
 void Calculator::clear()
 {
-
+m_currentNumebr=0;
+emit displayChanged("0");
 
 }
 
 void Calculator::allClear()
 {
-
+    m_currentNumebr=0;
+    m_lastResult=0;
+    emit displayChanged("0");
 
 }
 
@@ -81,6 +94,10 @@ void Calculator::calculate()
     m_wynik=m_lastResult*m_currentNumebr;
     if(m_operation==4)
     m_wynik=m_lastResult/m_currentNumebr;
+    if(m_operation==5)
+    m_wynik=m_lastResult<<m_currentNumebr;
+    if(m_operation==6)
+    m_wynik=m_lastResult>>m_currentNumebr;
 
     emit displayChanged((QString::number(m_wynik)));
 

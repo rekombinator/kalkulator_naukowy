@@ -35,6 +35,10 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
   connect(ui->button_razy,SIGNAL(clicked()),m_calculator,SLOT(multiplicationMode()));
   connect(ui->button_dziel,SIGNAL(clicked()),m_calculator,SLOT(divisionMode()));
   connect(ui->button_rowna,SIGNAL(clicked()),m_calculator,SLOT(calculate()));
+  connect(ui->button_lewo,SIGNAL(clicked()),m_calculator,SLOT(przesuniecieLewo()));
+  connect(ui->button_prawo,SIGNAL(clicked()),m_calculator,SLOT(przesunieciePrawo()));
+  connect(ui->button_AC,SIGNAL(clicked()),m_calculator,SLOT(allClear()));
+  connect(ui->button_C,SIGNAL(clicked()),m_calculator,SLOT(clear()));
 
   connect(ui->button_dwa,SIGNAL(clicked()),m_calculator,SLOT(dwojkowy()));
 connect(ui->button_osiem,SIGNAL(clicked()),m_calculator,SLOT(osemkowy()));
