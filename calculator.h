@@ -10,10 +10,10 @@ class Calculator : public QWidget
 public:
     explicit Calculator(QWidget *parent = 0);
 
+
+
 signals:
     void displayChanged(QString);
-
-
 
 public slots:
     void numEntered(int);
@@ -29,10 +29,16 @@ public slots:
 
     void calculate();
 
+    void dwojkowy();
+    void szesnastkowy();
+    void osemkowy();
+
+
 private:
     int m_lastResult;
     int m_currentNumebr;
-    bool m_isAdding;
+    int m_operation;
+    int m_wynik;
 
 };
 

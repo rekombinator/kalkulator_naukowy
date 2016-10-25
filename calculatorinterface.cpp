@@ -31,9 +31,14 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
   signalMapper->setMapping(ui->button_9,9);
 
   connect(ui->button_plus,SIGNAL(clicked()),m_calculator,SLOT(additionMode()));
-  connect(ui->button_minus,SIGNAL(clicked(bool)),m_calculator,SLOT(substractionMode()));
+  connect(ui->button_minus,SIGNAL(clicked()),m_calculator,SLOT(substractionMode()));
+  connect(ui->button_razy,SIGNAL(clicked()),m_calculator,SLOT(multiplicationMode()));
+  connect(ui->button_dziel,SIGNAL(clicked()),m_calculator,SLOT(divisionMode()));
   connect(ui->button_rowna,SIGNAL(clicked()),m_calculator,SLOT(calculate()));
 
+  connect(ui->button_dwa,SIGNAL(clicked()),m_calculator,SLOT(dwojkowy()));
+connect(ui->button_osiem,SIGNAL(clicked()),m_calculator,SLOT(osemkowy()));
+connect(ui->button_szesnascie,SIGNAL(clicked()),m_calculator,SLOT(szesnastkowy()));
 
 
 

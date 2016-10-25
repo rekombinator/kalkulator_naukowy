@@ -1,8 +1,28 @@
 #include "calculator.h"
 
 Calculator::Calculator(QWidget *parent) :
-    QWidget(parent),m_lastResult(0), m_currentNumebr(0), m_isAdding(true)
+    QWidget(parent),m_lastResult(0), m_currentNumebr(0), m_operation(0),m_wynik(0)
 {
+}
+
+void Calculator::dwojkowy()
+{
+   QString s = QString::number(m_wynik,2);
+   emit displayChanged(s);
+}
+
+void Calculator::szesnastkowy()
+{
+    QString s = QString::number(m_wynik,16);
+    emit displayChanged(s);
+
+}
+
+void Calculator::osemkowy()
+{
+    QString s = QString::number(m_wynik,8);
+    emit displayChanged(s);
+
 }
 
 void Calculator::numEntered(int a)
@@ -10,17 +30,15 @@ void Calculator::numEntered(int a)
     if(m_currentNumebr==0)
 {
         m_currentNumebr=a;
-  // m_lastResult=m_currentNumebr;
  }
  else
  {
-        m_lastResult=m_currentNumebr;
-        m_currentNumebr=a;
+    m_lastResult=m_currentNumebr;
+    m_currentNumebr=a;
  }
- QString s = QString::number(a);
- qDebug()<<m_currentNumebr;
- qDebug()<<m_lastResult;
 
+
+ QString s = QString::number(a);
  emit displayChanged(s);
 }
 
@@ -38,36 +56,32 @@ void Calculator::allClear()
 
 void Calculator::additionMode()
 {
-m_isAdding=true;
-
-
+m_operation=1;
 }
-
 void Calculator::substractionMode()
 {
-    m_isAdding=false;
-
+m_operation=2;
 }
-
 void Calculator::multiplicationMode()
 {
-
+m_operation=3;
 }
-
 void Calculator::divisionMode()
 {
-
+m_operation=4;
 }
-
 void Calculator::calculate()
 {
-    int wynik;
-    if(m_isAdding==true)
-    wynik=m_lastResult+m_currentNumebr;
-    if(m_isAdding==false)
-    wynik=m_lastResult-m_currentNumebr;
-   // m_lastResult+= m_isAdding?m_currentNumebr:-m_currentNumebr;
-   // m_currentNumebr = 0; zeruj flage
-    emit displayChanged((QString::number(wynik)));
+
+    if(m_operation==1)
+    m_wynik=m_lastResult+m_currentNumebr;
+    if(m_operation==2)
+    m_wynik=m_lastResult-m_currentNumebr;
+    if(m_operation==3)
+    m_wynik=m_lastResult*m_currentNumebr;
+    if(m_operation==4)
+    m_wynik=m_lastResult/m_currentNumebr;
+
+    emit displayChanged((QString::number(m_wynik)));
 
 }
