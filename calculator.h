@@ -14,9 +14,12 @@ public:
 
 signals:
     void displayChanged(QString);
+    void displayChanged10(QString);
+
 
 public slots:
     void numEntered(int);
+
 
     void clear();
     void allClear();
@@ -32,6 +35,7 @@ public slots:
     void dwojkowy();
     void szesnastkowy();
     void osemkowy();
+    void dziesietny();
 
     void przesuniecieLewo();
     void przesunieciePrawo();
@@ -42,6 +46,7 @@ private:
     int m_currentNumebr;
     int m_operation;
     int m_wynik;
+    int m_system;
 
 };
 

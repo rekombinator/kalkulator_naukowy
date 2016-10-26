@@ -1,18 +1,20 @@
 #include "calculator.h"
 
 Calculator::Calculator(QWidget *parent) :
-    QWidget(parent),m_lastResult(0), m_currentNumebr(0), m_operation(0),m_wynik(0)
+    QWidget(parent),m_lastResult(0), m_currentNumebr(0), m_operation(0),m_wynik(0),m_system(10)
 {
 }
 
 void Calculator::dwojkowy()
 {
-   QString s = QString::number(m_wynik,2);
+   m_system=2;
+    QString s = QString::number(m_wynik,2);
    emit displayChanged(s);
 }
 
 void Calculator::szesnastkowy()
 {
+    m_system=16;
     QString s = QString::number(m_wynik,16);
     emit displayChanged(s);
 
@@ -20,9 +22,17 @@ void Calculator::szesnastkowy()
 
 void Calculator::osemkowy()
 {
+    m_system=8;
     QString s = QString::number(m_wynik,8);
     emit displayChanged(s);
 
+}
+
+void Calculator::dziesietny()
+{
+    m_system=10;
+    QString s = QString::number(m_wynik,10);
+    emit displayChanged(s);
 }
 
 void Calculator::przesuniecieLewo()
@@ -46,11 +56,22 @@ void Calculator::numEntered(int a)
     m_lastResult=m_currentNumebr;
     m_currentNumebr=a;
  }
+  QString s,s1;
+if(m_system==10)
+s = QString::number(a,10);
+if(m_system==2)
+s = QString::number(a,2);
+if(m_system==8)
+s = QString::number(a,8);
+if(m_system==16)
+s = QString::number(a,16);
 
+s1=QString::number(a,10);
+emit displayChanged(s);
+emit displayChanged10(s1);
 
- QString s = QString::number(a);
- emit displayChanged(s);
 }
+
 
 void Calculator::clear()
 {
@@ -99,6 +120,20 @@ void Calculator::calculate()
     if(m_operation==6)
     m_wynik=m_lastResult>>m_currentNumebr;
 
-    emit displayChanged((QString::number(m_wynik)));
+    QString s,s1;
+    if(m_system==10)
+    s = QString::number(m_wynik,10);
+    if(m_system==2)
+    s = QString::number(m_wynik,2);
+    if(m_system==8)
+    s = QString::number(m_wynik,8);
+    if(m_system==16)
+    s = QString::number(m_wynik,16);
+
+    m_operation=0;
+
+    s1=QString::number(m_wynik,10);
+    emit displayChanged(s);
+    emit displayChanged10(s1);
 
 }

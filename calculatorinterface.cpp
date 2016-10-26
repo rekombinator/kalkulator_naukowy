@@ -43,11 +43,12 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
   connect(ui->button_dwa,SIGNAL(clicked()),m_calculator,SLOT(dwojkowy()));
 connect(ui->button_osiem,SIGNAL(clicked()),m_calculator,SLOT(osemkowy()));
 connect(ui->button_szesnascie,SIGNAL(clicked()),m_calculator,SLOT(szesnastkowy()));
-
+connect(ui->button_dziesiec,SIGNAL(clicked()),m_calculator,SLOT(dziesietny()));
 
 
     connect(signalMapper,SIGNAL(mapped(int)),m_calculator,SLOT(numEntered(int)));
     connect(m_calculator,SIGNAL(displayChanged(QString)),ui->label,SLOT(setText(QString)));
+    connect(m_calculator,SIGNAL(displayChanged10(QString)),ui->label_dziesietny,SLOT(setText(QString)));
 
 
 }

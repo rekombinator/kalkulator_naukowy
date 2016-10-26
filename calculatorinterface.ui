@@ -16,8 +16,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
+     <x>70</x>
+     <y>100</y>
      <width>47</width>
      <height>16</height>
     </rect>
@@ -313,6 +313,32 @@
    </property>
    <property name="text">
     <string>&lt;&lt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_dziesiec">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>140</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>dziesietny</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_dziesietny">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>20</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
    </property>
   </widget>
  </widget>
