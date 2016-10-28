@@ -19,7 +19,8 @@ signals:
 
 public slots:
     void numEntered(int);
-
+    void wyswietlaj_wynik();
+    void wyswietlaj_aktualny();
 
     void clear();
     void allClear();
@@ -40,13 +41,18 @@ public slots:
     void przesuniecieLewo();
     void przesunieciePrawo();
 
+    void memoryAdd();
+    void memoryMinus();
+    void memoryClear();
+    void memoryRecall();
+
 
 private:
     int m_lastResult;
     int m_currentNumebr;
     int m_operation;
-    int m_wynik;
     int m_system;
+    int m_memoryResult;
 
 };
 

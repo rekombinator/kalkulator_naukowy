@@ -1,139 +1,191 @@
 #include "calculator.h"
 
 Calculator::Calculator(QWidget *parent) :
-    QWidget(parent),m_lastResult(0), m_currentNumebr(0), m_operation(0),m_wynik(0),m_system(10)
+    QWidget(parent),m_lastResult(0), m_currentNumebr(0), m_operation(0),m_system(10)
 {
 }
 
 void Calculator::dwojkowy()
 {
    m_system=2;
-    QString s = QString::number(m_wynik,2);
-   emit displayChanged(s);
+   if(m_currentNumebr !=0)
+   {
+       wyswietlaj_aktualny();
+   }
+   else wyswietlaj_wynik();
 }
 
 void Calculator::szesnastkowy()
 {
     m_system=16;
-    QString s = QString::number(m_wynik,16);
-    emit displayChanged(s);
+    if(m_currentNumebr !=0)
+    {
+        wyswietlaj_aktualny();
+    }
+    else wyswietlaj_wynik();
 
 }
 
 void Calculator::osemkowy()
 {
     m_system=8;
-    QString s = QString::number(m_wynik,8);
-    emit displayChanged(s);
+    if(m_currentNumebr !=0)
+       {wyswietlaj_aktualny();
+    }
+    else wyswietlaj_wynik();
 
 }
 
 void Calculator::dziesietny()
 {
     m_system=10;
-    QString s = QString::number(m_wynik,10);
-    emit displayChanged(s);
+    if(m_currentNumebr !=0)
+     {
+        wyswietlaj_aktualny();
+    }
+    else wyswietlaj_wynik();
 }
 
 void Calculator::przesuniecieLewo()
 {
     m_operation=5;
+    calculate();
+
 }
 
 void Calculator::przesunieciePrawo()
 {
     m_operation=6;
+    calculate();
+
+}
+
+void Calculator::memoryAdd()
+{
+    m_memoryResult+=m_lastResult;
+}
+
+void Calculator::memoryMinus()
+{
+    m_memoryResult-=m_lastResult;
+}
+
+void Calculator::memoryClear()
+{
+    m_memoryResult=0;
+}
+
+void Calculator::memoryRecall()
+{
+    emit displayChanged(QString::number(m_memoryResult,m_system));
+    emit displayChanged10(QString::number(m_memoryResult,10));
 }
 
 void Calculator::numEntered(int a)
 {
-    if(m_currentNumebr==0)
-{
-        m_currentNumebr=a;
- }
- else
- {
-    m_lastResult=m_currentNumebr;
-    m_currentNumebr=a;
- }
-  QString s,s1;
+
 if(m_system==10)
-s = QString::number(a,10);
+{
+    m_currentNumebr=m_currentNumebr*10+a;
+
+}
 if(m_system==2)
-s = QString::number(a,2);
+{
+    m_currentNumebr=m_currentNumebr*2+a;
+
+}
 if(m_system==8)
-s = QString::number(a,8);
+{
+    m_currentNumebr=m_currentNumebr*8+a;
+
+}
 if(m_system==16)
-s = QString::number(a,16);
+{
+    m_currentNumebr=m_currentNumebr*16+a;
 
-s1=QString::number(a,10);
-emit displayChanged(s);
-emit displayChanged10(s1);
+}
 
+wyswietlaj_aktualny();
+
+}
+
+void Calculator::wyswietlaj_wynik()
+{
+
+    emit displayChanged(QString::number(m_lastResult,m_system));
+    emit displayChanged10(QString::number(m_lastResult,10));
+}
+
+void Calculator::wyswietlaj_aktualny()
+{
+    emit displayChanged(QString::number(m_currentNumebr,m_system));
+    emit displayChanged10(QString::number(m_lastResult,10));
 }
 
 
 void Calculator::clear()
 {
 m_currentNumebr=0;
-emit displayChanged("0");
+wyswietlaj_aktualny();
 
 }
 
 void Calculator::allClear()
 {
-    m_currentNumebr=0;
-    m_lastResult=0;
-    emit displayChanged("0");
+m_currentNumebr=0;
+m_lastResult=0;
+wyswietlaj_aktualny();
 
 }
 
 void Calculator::additionMode()
 {
 m_operation=1;
+calculate();
 }
 void Calculator::substractionMode()
 {
 m_operation=2;
+calculate();
 }
 void Calculator::multiplicationMode()
 {
 m_operation=3;
+calculate();
 }
 void Calculator::divisionMode()
 {
 m_operation=4;
+calculate();
+
 }
 void Calculator::calculate()
 {
-
+    if(m_lastResult==0)
+    {m_lastResult=m_currentNumebr;
+     }
+    else if(m_currentNumebr==0)
+    {return ;
+    }
+    else
+    {
     if(m_operation==1)
-    m_wynik=m_lastResult+m_currentNumebr;
+    m_lastResult=m_lastResult+m_currentNumebr;
     if(m_operation==2)
-    m_wynik=m_lastResult-m_currentNumebr;
+    m_lastResult=m_lastResult-m_currentNumebr;
     if(m_operation==3)
-    m_wynik=m_lastResult*m_currentNumebr;
+    m_lastResult=m_lastResult*m_currentNumebr;
     if(m_operation==4)
-    m_wynik=m_lastResult/m_currentNumebr;
+    m_lastResult=m_lastResult/m_currentNumebr;
     if(m_operation==5)
-    m_wynik=m_lastResult<<m_currentNumebr;
+    m_lastResult=m_lastResult<<m_currentNumebr;
     if(m_operation==6)
-    m_wynik=m_lastResult>>m_currentNumebr;
+    m_lastResult=m_lastResult>>m_currentNumebr;
+    }
 
-    QString s,s1;
-    if(m_system==10)
-    s = QString::number(m_wynik,10);
-    if(m_system==2)
-    s = QString::number(m_wynik,2);
-    if(m_system==8)
-    s = QString::number(m_wynik,8);
-    if(m_system==16)
-    s = QString::number(m_wynik,16);
+m_currentNumebr=0;
 
-    m_operation=0;
+wyswietlaj_wynik();
 
-    s1=QString::number(m_wynik,10);
-    emit displayChanged(s);
-    emit displayChanged10(s1);
 
 }
